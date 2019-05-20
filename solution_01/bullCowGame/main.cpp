@@ -9,36 +9,64 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 void PrintIntro();
-string GetGuessAndPrintBack();
+string GetGuess();
+bool AskToPlayAgain();
+
+static void PlayGame() {
+    constexpr int LOOP_THROUGH = 5;
+    for(int count=0; count<LOOP_THROUGH;count++)
+    {
+        string guess = GetGuess();
+        cout << "You have typed "<< guess <<endl;
+    }
+}
 
 //entry point for the app
 int main() {
     
     PrintIntro();
-    GetGuessAndPrintBack();
     
-    return 0;
+    
+    PlayGame();//loop for number of turns asking for guesses
+    AskToPlayAgain();
+    
+    
+    return 0;//exit app
 }
 
-//print introduction to the game
-void PrintIntro(){
+void PrintIntro()
+
+{
     
+    //introduce the game
     constexpr int WORD_LENGTH = 5;
     cout << "Welcome to Bulls and Cows, a fun word game!\n" ;
     cout << "Can you guess the " <<WORD_LENGTH;
     cout << " letters isogram I'm thinking of?\n";
     return;
 }
-
 //get guess from player
-string GetGuessAndPrintBack()
+string GetGuess()
 {
     string Guess = "";
-    cout << "\nEnter your guess: ";
+    cout << "Enter your guess: ";
     getline(cin,Guess);
     //print the guess back to them
-    cout << "You have typed "<< Guess <<endl;
     return Guess;
+}
+bool AskToPlayAgain()
+{
+    cout << "Do you want to play again? ";
+    string Response = "";
+    getline(cin, Response);
+    if (Response[0] == 'y' || Response[0] == 'Y')
+    {
+        cout << "Okaayy" << endl;
+        return true;
+    }
+    else{
+        cout << "Connard" << endl;
+        return false;
+    }
 }
